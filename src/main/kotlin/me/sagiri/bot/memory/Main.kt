@@ -91,6 +91,7 @@ object Main : KotlinPlugin(
                                     friend?.sendMessage(it.message)
                                 }
                             }
+                            recallMessages
                         }
                     }
                 }
@@ -100,7 +101,7 @@ object Main : KotlinPlugin(
             messages.add(event.message)
 
             // 超过两分钟删除
-            messages.forEach {
+            messages.stream().forEach {
                 if(event.time - it.time > 120) {
                     messages.remove(it)
                 }
